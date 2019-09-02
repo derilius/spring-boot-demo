@@ -30,28 +30,31 @@ public class PublicController {
 
     @PostMapping("/login")
     public ResponseEntity<OAuth2AccessToken> login(
-            @RequestHeader String authorization,
-            @RequestParam String username,
-            @RequestParam String password
+            @RequestBody LoginApi api,
+            @RequestHeader String authorization
     ) throws HttpRequestMethodNotSupportedException {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put("username", username);
-        parameters.put("password", password);
+        parameters.put("username", api.getUsername());
+        parameters.put("password", api.getPassword());
         parameters.put("grant_type", "password");
         parameters.put("scope", "ui");
         return tokenEndpoint.postAccessToken(new AuthenticationImpl(), parameters);
     }
 
     @GetMapping("/user")
-    public String user(
+    public ResponseEntity<String> user(
             Principal principal
     ) {
+        String response = "";
         if (principal != null) {
             System.out.println(principal.toString());
-            return "principal name: " + principal.getName();
+            response = "principal name: " + principal.getName();
         } else {
-            return "principal is null";
+            response = "principal is null";
         }
+
+        return ResponseEntity.ok()
+                .body(response);
     }
 
 }
