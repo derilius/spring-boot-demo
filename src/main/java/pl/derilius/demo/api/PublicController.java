@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/public")
+@RequestMapping(value = "/public", consumes = "application/json")
 public class PublicController {
 
     private TokenEndpoint tokenEndpoint;
