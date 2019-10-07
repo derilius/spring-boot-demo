@@ -2,18 +2,23 @@ package pl.derilius.demo.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import pl.derilius.demo.config.AuthenticationImpl;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/public", consumes = "application/json")
+@RequestMapping(value = "/public")
 public class PublicController {
 
     private TokenEndpoint tokenEndpoint;
@@ -39,6 +44,15 @@ public class PublicController {
         parameters.put("grant_type", "password");
         parameters.put("scope", "ui");
         return tokenEndpoint.postAccessToken(new AuthenticationImpl(), parameters);
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/user")
