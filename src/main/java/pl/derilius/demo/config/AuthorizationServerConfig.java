@@ -12,11 +12,13 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import pl.derilius.demo.domain.user.UserService;
 
 @Configuration
 @EnableAuthorizationServer
 @EnableResourceServer
+@EnableWebMvc
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;

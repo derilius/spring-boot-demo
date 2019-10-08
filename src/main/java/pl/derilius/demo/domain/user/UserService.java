@@ -6,35 +6,48 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.derilius.demo.domain.user.dto.RegisterApi;
+import pl.derilius.demo.domain.user.dto.UserDTO;
+import pl.derilius.demo.exception.MyException;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
-    private HashMap<Long, UserDTO> userTable = new HashMap<>();
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserService(PasswordEncoder passwordEncoder) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
         addUser();
     }
 
     private void addUser() {
-        UserDTO user = new UserDTO(1L, "user", passwordEncoder.encode("testtest"));
-        userTable.put(1L, user);
+        User user = new User(1L, "Jan", "Kowalski", "admin", passwordEncoder.encode("testtest"));
+        userRepository.save(user);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<UserDTO> user = userTable.values()
-                .stream()
-                .filter(u -> u.getLogin().equalsIgnoreCase(s))
-                .findAny();
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserDTO> user = userRepository.findByUsername(username)
+                .map(UserMapper::dto);
 
         return user.orElseThrow(() -> new UsernameNotFoundException("Not Found"));
+    }
+
+    public void register(RegisterApi api) {
+//        checkUsername(api.getUsername());
+        User user = new User(api, passwordEncoder.encode(api.getPassword()));
+        userRepository.save(user);
+    }
+
+    private void checkUsername(String username) {
+        boolean unavailable = userRepository.findByUsername(username).isPresent();
+        if (unavailable)
+            throw new MyException();
     }
 
 }

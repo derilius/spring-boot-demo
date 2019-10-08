@@ -1,5 +1,6 @@
-package pl.derilius.demo.domain.user;
+package pl.derilius.demo.domain.user.dto;
 
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,15 +8,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-class UserDTO implements UserDetails {
+@Builder
+public class UserDTO implements UserDetails {
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -30,7 +30,7 @@ class UserDTO implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     @Override
@@ -52,15 +52,5 @@ class UserDTO implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public UserDTO(Long id, String login, String password) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-    }
-
-    private Long id;
-    private String login;
-    private String password;
 
 }

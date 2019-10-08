@@ -10,6 +10,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import pl.derilius.demo.config.AuthenticationImpl;
+import pl.derilius.demo.domain.user.UserService;
+import pl.derilius.demo.domain.user.dto.LoginApi;
+import pl.derilius.demo.domain.user.dto.RegisterApi;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,16 +24,21 @@ import java.util.Map;
 @RequestMapping(value = "/public")
 public class PublicController {
 
-    private TokenEndpoint tokenEndpoint;
+    private final TokenEndpoint tokenEndpoint;
+    private final UserService userService;
 
     @Autowired
-    public PublicController(TokenEndpoint tokenEndpoint) {
+    public PublicController(TokenEndpoint tokenEndpoint, UserService userService) {
         this.tokenEndpoint = tokenEndpoint;
+        this.userService = userService;
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "Home";
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(
+            @RequestBody RegisterApi api
+    ) {
+        userService.register(api);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")

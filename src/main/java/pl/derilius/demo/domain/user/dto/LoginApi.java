@@ -1,4 +1,4 @@
-package pl.derilius.demo.api;
+package pl.derilius.demo.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
