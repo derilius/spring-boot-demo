@@ -41,6 +41,12 @@ public class PublicController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<Void> test(
+    ) {
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/login")
     public ResponseEntity<OAuth2AccessToken> login(
             @RequestBody LoginApi api,
