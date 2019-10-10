@@ -1,4 +1,4 @@
-package pl.derilius.demo.config;
+package pl.derilius.demo.domain.user.dto;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

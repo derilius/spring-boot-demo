@@ -9,14 +9,13 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import pl.derilius.demo.config.AuthenticationImpl;
+import pl.derilius.demo.domain.user.dto.AuthenticationImpl;
 import pl.derilius.demo.domain.user.UserService;
 import pl.derilius.demo.domain.user.dto.LoginApi;
 import pl.derilius.demo.domain.user.dto.RegisterApi;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,12 +40,6 @@ public class PublicController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Void> test(
-    ) {
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/login")
     public ResponseEntity<OAuth2AccessToken> login(
             @RequestBody LoginApi api,
@@ -67,22 +60,6 @@ public class PublicController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/user")
-    public ResponseEntity<String> user(
-            Principal principal
-    ) {
-        String response = "";
-        if (principal != null) {
-            System.out.println(principal.toString());
-            response = "principal name: " + principal.getName();
-        } else {
-            response = "principal is null";
-        }
-
-        return ResponseEntity.ok()
-                .body(response);
     }
 
 }

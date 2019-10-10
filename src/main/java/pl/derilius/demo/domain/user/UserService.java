@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.derilius.demo.domain.user.dto.RegisterApi;
 import pl.derilius.demo.domain.user.dto.UserDTO;
-import pl.derilius.demo.exception.MyException;
+import pl.derilius.demo.exception.ValueTakenException;
 
 import java.util.Optional;
 
@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void register(RegisterApi api) {
-//        checkUsername(api.getUsername());
+        checkUsername(api.getUsername());
         User user = new User(api, passwordEncoder.encode(api.getPassword()));
         userRepository.save(user);
     }
@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
     private void checkUsername(String username) {
         boolean unavailable = userRepository.findByUsername(username).isPresent();
         if (unavailable)
-            throw new MyException();
+            throw new ValueTakenException("username already taken");
     }
 
 }
