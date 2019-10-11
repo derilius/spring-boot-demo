@@ -3,23 +3,25 @@ package pl.derilius.demo.domain.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import org.springframework.security.core.GrantedAuthority;
 import pl.derilius.demo.domain.user.dto.RegisterApi;
 import pl.derilius.demo.utils.AbstractModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
-@Table(schema = "auth", name = "user")
-@SequenceGenerator(schema = "auth", name = "user_seq_id")
+@Table(schema = "auth", name = "users")
+@SequenceGenerator(schema = "auth", name = "user_seq_id", allocationSize = 1)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 class User extends AbstractModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_seq_id")
     private Long id;
 
     @Column(name = "first_name")
@@ -36,11 +38,20 @@ class User extends AbstractModel {
     @NotBlank
     private String password;
 
+    @NonNull
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
     User(RegisterApi api, String password) {
         this.firstName = api.getFirstName();
         this.lastName = api.getLastName();
         this.username = api.getUsername();
         this.password = password;
+    }
+
+    Collection<? extends GrantedAuthority> getAuthorities() {
+        return role.getPermissionList();
     }
 
 }

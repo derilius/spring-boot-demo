@@ -7,10 +7,11 @@ class UserMapper {
     static UserDTO dto(User user) {
         return UserDTO.builder()
                 .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .authorities(user.getAuthorities())
                 .build();
     }
 
