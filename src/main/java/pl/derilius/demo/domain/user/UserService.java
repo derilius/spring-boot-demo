@@ -22,12 +22,6 @@ public class UserService implements UserDetailsService {
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-        addUser();
-    }
-
-    private void addUser() {
-        User user = new User(1L, "Jan", "Kowalski", "admin", passwordEncoder.encode("testtest"));
-        userRepository.save(user);
     }
 
     @Override

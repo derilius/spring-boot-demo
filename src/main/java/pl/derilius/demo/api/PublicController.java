@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import pl.derilius.demo.domain.user.dto.AuthenticationImpl;
+import pl.derilius.demo.utils.AuthenticationImpl;
 import pl.derilius.demo.domain.user.UserService;
 import pl.derilius.demo.domain.user.dto.LoginApi;
 import pl.derilius.demo.domain.user.dto.RegisterApi;
