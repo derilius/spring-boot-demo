@@ -35,7 +35,8 @@ public class UserService implements UserDetailsService {
 
     public void register(RegisterApi api) {
         checkUsername(api.getUsername());
-        User user = new User(api, passwordEncoder.encode(api.getPassword()));
+        Role role = roleService.getRole(Role.Name.USER);
+        User user = new User(api, passwordEncoder.encode(api.getPassword()), role);
         userRepository.save(user);
     }
 

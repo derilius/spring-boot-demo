@@ -11,6 +11,7 @@ import pl.derilius.demo.utils.AbstractModel;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(schema = "auth", name = "users")
@@ -43,15 +44,18 @@ class User extends AbstractModel {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    User(RegisterApi api, String password) {
+    User(RegisterApi api, String password, Role role) {
         this.firstName = api.getFirstName();
         this.lastName = api.getLastName();
         this.username = api.getUsername();
         this.password = password;
+        this.role = role;
     }
 
     Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getPermissionList();
+        return role.getPermissionList().stream()
+                .map(permission -> (GrantedAuthority) permission::getPermission)
+                .collect(Collectors.toList());
     }
 
 }
