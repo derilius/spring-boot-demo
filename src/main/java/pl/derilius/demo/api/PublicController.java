@@ -9,10 +9,11 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import pl.derilius.demo.utils.AuthenticationImpl;
-import pl.derilius.demo.domain.user.UserService;
+import pl.derilius.demo.domain.user.LoginService;
+import pl.derilius.demo.domain.user.UserFacade;
 import pl.derilius.demo.domain.user.dto.LoginApi;
 import pl.derilius.demo.domain.user.dto.RegisterApi;
+import pl.derilius.demo.utils.AuthenticationImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,19 +25,19 @@ import java.util.Map;
 public class PublicController {
 
     private final TokenEndpoint tokenEndpoint;
-    private final UserService userService;
+    private final UserFacade userFacade;
 
     @Autowired
-    public PublicController(TokenEndpoint tokenEndpoint, UserService userService) {
+    public PublicController(TokenEndpoint tokenEndpoint, LoginService userService, UserFacade userFacade) {
         this.tokenEndpoint = tokenEndpoint;
-        this.userService = userService;
+        this.userFacade = userFacade;
     }
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(
             @RequestBody RegisterApi api
     ) {
-        userService.register(api);
+        userFacade.register(api);
         return ResponseEntity.ok().build();
     }
 

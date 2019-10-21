@@ -8,7 +8,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(schema = "auth", name = "roles")
@@ -25,7 +24,7 @@ class Role {
     @Column(name = "name", nullable = false)
     private Name name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             schema = "auth", name = "role2permission",
@@ -34,9 +33,9 @@ class Role {
     )
     private Collection<Permission> permissionList = new ArrayList<>();
 
-    Role(Name userRoleName, List<Permission> permissions) {
+    Role(Name userRoleName) {
         this.name = userRoleName;
-        this.permissionList = permissions;
+        this.permissionList = new ArrayList<>();
     }
 
     public enum Name {
@@ -49,7 +48,6 @@ class Role {
          * {@code Użytkownik}
          */
         USER,
-
     }
 
 }

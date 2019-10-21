@@ -1,7 +1,6 @@
 package pl.derilius.demo.config;
 
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.MigrationVersion;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

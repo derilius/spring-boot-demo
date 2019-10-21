@@ -1,16 +1,15 @@
 package pl.derilius.demo.domain.user;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(schema = "auth", name = "role2permission")
 @SequenceGenerator(schema = "auth", name = "role2permission_seq_id", allocationSize = 1)
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 class Role2Permission {
 
@@ -18,11 +17,18 @@ class Role2Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "role2permission_seq_id")
     private Long id;
 
+    @NotNull
     @Column(name = "role_id", nullable = false)
     private Long roleId;
 
+    @NotNull
     @Column(name = "permission_id", nullable = false)
     private Long permissionId;
+
+    public Role2Permission(@NotNull Long roleId, @NotNull Long permissionId) {
+        this.roleId = roleId;
+        this.permissionId = permissionId;
+    }
 
 }
 

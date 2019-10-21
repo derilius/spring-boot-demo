@@ -3,7 +3,6 @@ package pl.derilius.demo.domain.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-class Permission implements GrantedAuthority {
+class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "permission_seq_id")
@@ -30,11 +29,6 @@ class Permission implements GrantedAuthority {
 
     static Permission systemUserRole() {
         return new Permission(null, "user", "SYSTEM", "ROLE_USER");
-    }
-
-    @Override
-    public String getAuthority() {
-        return permission;
     }
 
 }

@@ -1,17 +1,18 @@
 package pl.derilius.demo.domain.user;
 
-import pl.derilius.demo.domain.user.dto.UserDTO;
+import pl.derilius.demo.domain.user.dto.User;
 
 class UserMapper {
 
-    static UserDTO dto(User user) {
-        return UserDTO.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .authorities(user.getAuthorities())
+    static User dto(Login login) {
+        return User.builder()
+                .id(login.getId())
+                .mail(login.getMail())
+                .password(login.getPassword())
+                .firstName(login.getPeople().getFirstName())
+                .lastName(login.getPeople().getLastName())
+                .active(login.isActive())
+                .authorities(login.getAuthorities())
                 .build();
     }
 

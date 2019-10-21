@@ -6,24 +6,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements UserDetails {
+public class User implements UserDetails {
 
     private Long id;
     private String firstName;
     private String lastName;
-    private String username;
-    @JsonIgnore
+    private String mail;
     private String password;
+    private boolean active;
     private Collection<? extends GrantedAuthority> authorities;
 
     @Override
@@ -32,33 +30,39 @@ public class UserDTO implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return this.password;
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
-        return this.username;
+        return this.mail;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
-        return true;
+        return this.active;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
-        return true;
+        return this.active;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.active;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
-        return true;
+        return this.active;
     }
 
 }

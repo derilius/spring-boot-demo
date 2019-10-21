@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterApi {
+public class PasswordResetApi {
 
-    private String mail;
-    private String password;
-    private String firstName;
-    private String lastName;
+    @NotBlank
+    private String newPassword;
+
+    @NotBlank
+    private String repeatedPassword;
 
 }

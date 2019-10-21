@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import pl.derilius.demo.domain.user.UserService;
+import pl.derilius.demo.domain.user.LoginService;
 
 @Configuration
 @EnableAuthorizationServer
@@ -19,10 +19,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userDetailsService;
+    private final LoginService userDetailsService;
     private static TokenStore tokenStore = new InMemoryTokenStore();
 
-    public AuthorizationServerConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserService userDetailsService) {
+    public AuthorizationServerConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, LoginService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
