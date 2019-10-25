@@ -12,7 +12,7 @@ import javax.persistence.*;
 @SequenceGenerator(schema = "auth", name = "people_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
-class People extends AbstractModel {
+public class People extends AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "people_seq_id")
