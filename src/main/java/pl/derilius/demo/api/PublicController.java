@@ -28,7 +28,7 @@ public class PublicController {
     private final UserFacade userFacade;
 
     @Autowired
-    public PublicController(TokenEndpoint tokenEndpoint, LoginService userService, UserFacade userFacade) {
+    public PublicController(TokenEndpoint tokenEndpoint, UserFacade userFacade) {
         this.tokenEndpoint = tokenEndpoint;
         this.userFacade = userFacade;
     }
