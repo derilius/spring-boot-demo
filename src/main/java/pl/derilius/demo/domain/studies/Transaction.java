@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "public", name = "transaction")
-@SequenceGenerator(schema = "transaction", name = "transaction_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "transactions")
+@SequenceGenerator(schema = "public", name = "transaction_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
 public class Transaction extends AbstractModel {

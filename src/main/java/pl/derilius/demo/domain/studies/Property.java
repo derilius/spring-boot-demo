@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(schema = "public", name = "property")
-@SequenceGenerator(schema = "property", name = "property_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "properties")
+@SequenceGenerator(schema = "public", name = "property_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
 public class Property extends AbstractModel {
