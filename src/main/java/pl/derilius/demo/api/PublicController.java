@@ -46,7 +46,7 @@ public class PublicController {
     @PostMapping("/login")
     public ResponseEntity<OAuth2AccessToken> login(
             @RequestBody LoginApi api,
-            @RequestHeader String authorization
+            @RequestHeader(name = "Basic YnJvd3Nlcjo=") String authorization
     ) throws HttpRequestMethodNotSupportedException {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("username", api.getUsername());

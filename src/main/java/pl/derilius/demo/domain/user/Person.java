@@ -6,6 +6,7 @@ import pl.derilius.demo.domain.user.dto.RegisterApi;
 import pl.derilius.demo.utils.AbstractModel;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(schema = "public", name = "people")
@@ -23,6 +24,28 @@ public class Person extends AbstractModel {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "telephone")
+    private String telephone;
+
+    @Column(name = "pesel")
+    private String pesel;
+
+    @Column(name = "salary")
+    private double salary;
+
+    @Column(name = "birth_date")
+    private LocalDate birthday;
+
+    @Column(name = "worked_date")
+    private LocalDate workedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     Person(RegisterApi api) {
         this.firstName = api.getFirstName();
