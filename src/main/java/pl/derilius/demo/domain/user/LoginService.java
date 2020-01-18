@@ -36,10 +36,10 @@ public class LoginService implements UserDetailsService {
         return user.orElseThrow(() -> new UsernameNotFoundException("Not Found"));
     }
 
-    Login register(RegisterApi api, People people) {
+    Login register(RegisterApi api, Person person) {
         checkMail(api.getMail());
         Role role = roleService.getRole(Role.Name.USER);
-        Login login = new Login(api.getMail(), passwordEncoder.encode(api.getPassword()), role, people);
+        Login login = new Login(api.getMail(), passwordEncoder.encode(api.getPassword()), role, person);
         return loginRepository.save(login);
     }
 

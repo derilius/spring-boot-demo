@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(schema = "auth", name = "role2permission")
-@SequenceGenerator(schema = "auth", name = "role2permission_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "role2permission")
+@SequenceGenerator(schema = "public", name = "role2permission_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
 class Role2Permission {

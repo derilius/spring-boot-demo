@@ -1,5 +1,6 @@
 package pl.derilius.demo.api;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/public")
+@Api(tags = "Auth", produces = "application/json", consumes = "application/json")
 public class PublicController {
 
     private final TokenEndpoint tokenEndpoint;

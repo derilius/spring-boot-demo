@@ -8,11 +8,11 @@ import pl.derilius.demo.utils.AbstractModel;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "auth", name = "people")
-@SequenceGenerator(schema = "auth", name = "people_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "people")
+@SequenceGenerator(schema = "public", name = "people_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
-public class People extends AbstractModel {
+public class Person extends AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "people_seq_id")
@@ -24,7 +24,7 @@ public class People extends AbstractModel {
     @Column(name = "last_name")
     private String lastName;
 
-    People(RegisterApi api) {
+    Person(RegisterApi api) {
         this.firstName = api.getFirstName();
         this.lastName = api.getLastName();
     }

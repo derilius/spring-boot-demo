@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(schema = "auth", name = "login")
-@SequenceGenerator(schema = "auth", name = "login_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "login")
+@SequenceGenerator(schema = "public", name = "login_seq_id", allocationSize = 1)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,7 +37,7 @@ class Login extends AbstractModel {
     @NonNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "people_id", nullable = false)
-    private People people;
+    private Person person;
 
     @NonNull
     @ManyToOne(optional = false)
@@ -46,7 +46,7 @@ class Login extends AbstractModel {
 
     @Column(name = "active", nullable = false)
     @NotNull
-    private boolean active = false;
+    private boolean active = true;
 
     @Column(name = "activate_token")
     private String activateToken = RandomString.make(10);
@@ -54,11 +54,11 @@ class Login extends AbstractModel {
     @Column(name = "password_token")
     private String passwordToken;
 
-    Login(String mail, String password, Role role, People people) {
+    Login(String mail, String password, Role role, Person person) {
         this.mail = mail;
         this.password = password;
         this.role = role;
-        this.people = people;
+        this.person = person;
     }
 
     Collection<? extends GrantedAuthority> getAuthorities() {

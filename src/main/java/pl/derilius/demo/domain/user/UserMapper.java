@@ -9,8 +9,8 @@ class UserMapper {
                 .id(login.getId())
                 .mail(login.getMail())
                 .password(login.getPassword())
-                .firstName(login.getPeople().getFirstName())
-                .lastName(login.getPeople().getLastName())
+                .firstName(login.getPerson().getFirstName())
+                .lastName(login.getPerson().getLastName())
                 .active(login.isActive())
                 .authorities(login.getAuthorities())
                 .build();

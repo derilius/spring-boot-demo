@@ -14,9 +14,9 @@ class PeopleService {
         this.repository = repository;
     }
 
-    People create(RegisterApi api) {
-        People people = new People(api);
-        return repository.save(people);
+    Person create(RegisterApi api) {
+        Person person = new Person(api);
+        return repository.save(person);
     }
 
 }

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "auth", name = "permissions")
-@SequenceGenerator(schema = "auth", name = "permission_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "permissions")
+@SequenceGenerator(schema = "public", name = "permission_seq_id", allocationSize = 1)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

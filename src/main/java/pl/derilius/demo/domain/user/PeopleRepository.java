@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface PeopleRepository extends JpaRepository<People, Long> {
+interface PeopleRepository extends JpaRepository<Person, Long> {
 
 }

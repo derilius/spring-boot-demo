@@ -27,7 +27,7 @@ import static springfox.documentation.builders.PathSelectors.any;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    private static final String BASE_PACKAGE = "pl.derilius.base.api";
+    private static final String BASE_PACKAGE = "pl.derilius.demo.api";
     private static final String HEADER = "header";
 
     @Bean

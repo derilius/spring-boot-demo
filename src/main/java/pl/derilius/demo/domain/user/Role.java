@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table(schema = "auth", name = "roles")
-@SequenceGenerator(schema = "auth", name = "role_seq_id", allocationSize = 1)
+@Table(schema = "public", name = "roles")
+@SequenceGenerator(schema = "public", name = "role_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
 class Role {
@@ -27,7 +27,7 @@ class Role {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
-            schema = "auth", name = "role2permission",
+            schema = "public", name = "role2permission",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
