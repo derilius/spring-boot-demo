@@ -33,4 +33,16 @@ public class Transaction extends AbstractModel {
     @JoinColumn(name = "person_id")
     private Person person;
 
+    public Transaction(Person person, Property property, double price) {
+        this.date = LocalDate.now();
+        this.price = price;
+        this.person = person;
+        this.property = property;
+    }
+
+    public void update(Person person, Property property, double price) {
+        this.price = price;
+        this.person = person;
+        this.property = property;
+    }
 }

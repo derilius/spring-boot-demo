@@ -38,7 +38,7 @@ public class LoginService implements UserDetailsService {
 
     Login register(RegisterApi api, Person person) {
         checkMail(api.getMail());
-        Role role = roleService.getRole(Role.Name.USER);
+        Role role = roleService.getRole("USER");
         Login login = new Login(api.getMail(), passwordEncoder.encode(api.getPassword()), role, person);
         return loginRepository.save(login);
     }

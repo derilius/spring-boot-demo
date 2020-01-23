@@ -2,7 +2,7 @@ package pl.derilius.demo.domain.studies;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.derilius.demo.domain.user.dto.RegisterApi;
+import pl.derilius.demo.domain.studies.dto.PropertyAPI;
 import pl.derilius.demo.utils.AbstractModel;
 
 import javax.persistence.*;
@@ -29,7 +29,7 @@ public class Property extends AbstractModel {
     private int roomsNumber;
 
     @Column(name = "floors_number")
-    private int roomsFloors;
+    private int floorsNumber;
 
     @Column(name = "floor")
     private int floor;
@@ -46,4 +46,27 @@ public class Property extends AbstractModel {
     @Column(name = "handing_date")
     private LocalDate handingDate;
 
+    public Property(PropertyAPI api) {
+        this.type = api.getType();
+        this.area = api.getArea();
+        this.floorsNumber = api.getFloorsNumber();
+        this.roomsNumber = api.getRoomsNumber();
+        this.floor = api.getFloor();
+        this.price = api.getPrice();
+        this.address = api.getAddress();
+        this.condition = api.getCondition();
+        this.handingDate = LocalDate.parse(api.getHandingDate());
+    }
+
+    public void update(PropertyAPI api) {
+        this.type = api.getType();
+        this.area = api.getArea();
+        this.floorsNumber = api.getFloorsNumber();
+        this.roomsNumber = api.getRoomsNumber();
+        this.floor = api.getFloor();
+        this.price = api.getPrice();
+        this.address = api.getAddress();
+        this.condition = api.getCondition();
+        this.handingDate = LocalDate.parse(api.getHandingDate());
+    }
 }

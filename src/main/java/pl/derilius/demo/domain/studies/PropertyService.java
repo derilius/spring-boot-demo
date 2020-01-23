@@ -2,6 +2,7 @@ package pl.derilius.demo.domain.studies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.derilius.demo.domain.studies.dto.PropertyAPI;
 import pl.derilius.demo.domain.studies.dto.PropertyDTO;
 
 import java.util.List;
@@ -24,5 +25,27 @@ public class PropertyService {
                 .collect(Collectors.toList());
     }
 
+    public PropertyDTO create(PropertyAPI api) {
+        Property property = new Property(api);
+        property = repository.save(property);
+        return Mapper.toPropertyDTO(property);
+    }
+
+    public PropertyDTO getOne(Long id) {
+        Property property = repository.getOne(id);
+        return Mapper.toPropertyDTO(property);
+    }
+
+    public void update(Long id, PropertyAPI api) {
+        Property property = repository.getOne(id);
+        property.update(api);
+        repository.save(property);
+    }
+
+    public void delete(Long id) {
+        Property property = repository.getOne(id);
+        property.delete();
+        repository.save(property);
+    }
 
 }

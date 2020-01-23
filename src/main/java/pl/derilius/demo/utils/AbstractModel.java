@@ -25,7 +25,7 @@ public class AbstractModel implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at", nullable = false)
+    @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
     public void delete(){

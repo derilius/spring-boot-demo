@@ -14,15 +14,15 @@ import java.util.Collection;
 @SequenceGenerator(schema = "public", name = "role_seq_id", allocationSize = 1)
 @Getter
 @NoArgsConstructor
-class Role {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "role_seq_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false)
-    private Name name;
+    private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -33,21 +33,21 @@ class Role {
     )
     private Collection<Permission> permissionList = new ArrayList<>();
 
-    Role(Name userRoleName) {
+    Role(String userRoleName) {
         this.name = userRoleName;
         this.permissionList = new ArrayList<>();
     }
 
-    public enum Name {
-        /**
-         * {@code Administrator}
-         */
-        ADMIN,
-
-        /**
-         * {@code Użytkownik}
-         */
-        USER,
-    }
+//    public enum Name {
+//        /**
+//         * {@code Administrator}
+//         */
+//        ADMIN,
+//
+//        /**
+//         * {@code Użytkownik}
+//         */
+//        USER,
+//    }
 
 }
