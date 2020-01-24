@@ -25,7 +25,7 @@ public class TransactionService {
     }
 
     public List<TransactionDTO> getAll() {
-        return repository.findAll()
+        return repository.findAllByDeletedAtIsNull()
                 .stream()
                 .map(Mapper::toTransactionDTO)
                 .collect(Collectors.toList());
