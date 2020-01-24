@@ -21,6 +21,8 @@ public class Mapper {
                 .address(p.getAddress())
                 .condition(p.getCondition())
                 .handingDate(p.getHandingDate())
+                .personId(p.getPerson().getId())
+                .personName(p.getPerson().getFirstName() + ' ' + p.getPerson().getLastName())
                 .build();
     }
 

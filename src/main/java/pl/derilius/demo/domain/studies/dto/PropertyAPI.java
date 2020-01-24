@@ -29,4 +29,6 @@ public class PropertyAPI {
 
     private String handingDate;
 
+    private Long personId;
+
 }

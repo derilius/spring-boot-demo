@@ -29,4 +29,8 @@ public class PropertyDTO {
 
     private LocalDate handingDate;
 
+    private Long personId;
+
+    private String personName;
+
 }

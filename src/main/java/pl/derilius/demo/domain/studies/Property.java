@@ -2,7 +2,9 @@ package pl.derilius.demo.domain.studies;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import pl.derilius.demo.domain.studies.dto.PropertyAPI;
+import pl.derilius.demo.domain.user.Person;
 import pl.derilius.demo.utils.AbstractModel;
 
 import javax.persistence.*;
@@ -46,7 +48,11 @@ public class Property extends AbstractModel {
     @Column(name = "handing_date")
     private LocalDate handingDate;
 
-    public Property(PropertyAPI api) {
+    @ManyToOne
+    @JoinColumn(name = "people_id")
+    private Person person;
+
+    public Property(PropertyAPI api, Person person) {
         this.type = api.getType();
         this.area = api.getArea();
         this.floorsNumber = api.getFloorsNumber();
@@ -56,9 +62,10 @@ public class Property extends AbstractModel {
         this.address = api.getAddress();
         this.condition = api.getCondition();
         this.handingDate = LocalDate.parse(api.getHandingDate());
+        this.person = person;
     }
 
-    public void update(PropertyAPI api) {
+    public void update(PropertyAPI api, Person person) {
         this.type = api.getType();
         this.area = api.getArea();
         this.floorsNumber = api.getFloorsNumber();
@@ -68,5 +75,6 @@ public class Property extends AbstractModel {
         this.address = api.getAddress();
         this.condition = api.getCondition();
         this.handingDate = LocalDate.parse(api.getHandingDate());
+        this.person = person;
     }
 }
